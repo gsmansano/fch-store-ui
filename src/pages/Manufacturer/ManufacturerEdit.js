@@ -17,12 +17,12 @@ import { LoadingButton } from '@mui/lab';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // components
-import { useGetManufacturerById, useUpdatePartner } from '../../services/useManufacturerServices';
+import { useGetManufacturerById, useUpdateManufacturer } from '../../services/useManufacturerServices';
 
 export const ManufacturerEdit = () => {
 
     const navigate = useNavigate();
-    const { doRequest, data: result, isLoading: isEditing } = useUpdatePartner();
+    const { doRequest, data: result, isLoading: isEditing } = useUpdateManufacturer();
     const { data, getData } = useGetManufacturerById();
     const { manufacturerId } = useParams();
 
@@ -36,7 +36,6 @@ export const ManufacturerEdit = () => {
     const formik = useFormik({
         initialValues: {
             name: '',
-            isActive: false
         },
         validationSchema: formSchema,
         onSubmit: async (formData) => {
@@ -47,7 +46,7 @@ export const ManufacturerEdit = () => {
     const { errors, touched, isSubmitting, handleSubmit, getFieldProps, setFieldValue } = formik;
 
     useEffect(() => {
-        if (result && result?.partnerId !== "") {
+        if (result) {
             navigate(`/app/manufacturer`, { replace: true });
         }
     }, [result, navigate]);

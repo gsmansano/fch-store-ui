@@ -28,8 +28,14 @@ import Label from '../../components/label/Label';
 const TABLE_HEAD = [
     { id: 'supplierId', label: 'ID', alignRight: false },
     { id: 'name', label: 'Name', alignRight: false },
-    { id: 'isActive', label: 'Is active?', alignRight: false },
-    { id: '' }
+    { id: 'fullAddress', label: 'Full Address', alignRight: false },
+    { id: 'zipCode', label: 'Zip Code', alignRight: false },
+    { id: 'contactName', label: 'Contact Name', alignRight: false },
+    { id: 'phoneNumber', label: 'Phone Number', alignRight: false },
+    { id: 'emailAddress', label: 'Email Address', alignRight: false },
+    { id: 'vatNumber', label: 'VAT Number', alignRight: false },
+    { id: 'isActive', label: 'Is Active?', alignRight: false },
+    { id: '' } // For the actions (Edit, Remove)
 ];
 
 // ----------------------------------------------------------------------
@@ -59,7 +65,7 @@ export const SupplierList = () => {
             <Container maxWidth="xl">
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>
-                    Suppliers
+                        Suppliers
                     </Typography>
                     <Button
                         variant="contained"
@@ -88,7 +94,7 @@ export const SupplierList = () => {
                                 </TableHead>
                                 <TableBody>
                                     {pageData?.length > 0 && pageData.map((row) => {
-                                        const { supplierId, name, isActive } = row;
+                                        const { supplierId, name, fullAddress, zipCode, contactName, phoneNumber, emailAddress, vatNumber, isActive } = row;
 
                                         return (
                                             <TableRow hover key={supplierId} tabIndex={-1}>
@@ -100,6 +106,12 @@ export const SupplierList = () => {
                                                     </Stack>
                                                 </TableCell>
                                                 <TableCell align="left">{name}</TableCell>
+                                                <TableCell align="left">{fullAddress}</TableCell>
+                                                <TableCell align="left">{zipCode}</TableCell>
+                                                <TableCell align="left">{contactName}</TableCell>
+                                                <TableCell align="left">{phoneNumber}</TableCell>
+                                                <TableCell align="left">{emailAddress}</TableCell>
+                                                <TableCell align="left">{vatNumber}</TableCell>
                                                 <TableCell align="left">
                                                     <Label color={isActive ? 'success' : 'error'}>{isActive ? 'Yes' : 'No'}</Label>
                                                 </TableCell>
@@ -121,7 +133,7 @@ export const SupplierList = () => {
 
                                     {(isLoading || isRemoving) && (
                                         <TableRow style={{ height: 53 * 6 }}>
-                                            <TableCell colSpan={4} align="center">
+                                            <TableCell colSpan={10} align="center">
                                                 <CircularProgress size={50} />
                                             </TableCell>
                                         </TableRow>

@@ -86,7 +86,7 @@ export const useCreateManufacturer = () => {
     return { data, isLoading, doRequest, error };
 }
 
-export const useUpdatePartner = () => {
+export const useUpdateManufacturer = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);

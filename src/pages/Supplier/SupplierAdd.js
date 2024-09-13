@@ -23,12 +23,44 @@ export const SupplierAdd = () => {
     const { doRequest, data: result, isLoading } = useCreateSupplier();
 
     const formSchema = Yup.object().shape({
-        name: Yup.string().required(),
+        name: Yup.string()
+            .required('Supplier name is required'),
+
+        fullAddress: Yup.string()
+            .required('A full address is required'),
+
+        zipCode: Yup.string()
+            .matches(/^[a-zA-Z0-9]+$/, 'Zip Code must contain only letters and numbers')
+            .required('Zip Code is required'),
+
+        contactName: Yup.string()
+            .required('A Contact Name is required'),
+
+        phoneNumber: Yup.string()
+            .matches(/^[0-9]+$/, 'Phone Number must contain only digits')
+            .min(10, 'Phone Number must be at least 10 digits')
+            .max(15, 'Phone Number cannot exceed 15 digits')
+            .required('Phone Number is required'),
+
+        emailAddress: Yup.string()
+            .email('Invalid email address')
+            .required('Email Address is required'),
+
+        vatNumber: Yup.string()
+            .matches(/^[a-zA-Z0-9]+$/, 'VAT Number must be alphanumeric')
+            .required('VAT Number is required')
+
     });
 
     const formik = useFormik({
         initialValues: {
             name: '',
+            fullAddress: '',
+            zipCode: '',
+            contactName: '',
+            phoneNumber: '',
+            emailAddress: '',
+            vatNumber: '',
         },
         validationSchema: formSchema,
         onSubmit: async (formData) => {
@@ -68,6 +100,48 @@ export const SupplierAdd = () => {
                                             {...getFieldProps('name')}
                                             error={Boolean(touched.name && errors.name)}
                                             helperText={touched.name && errors.name}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            label="Full Address"
+                                            {...getFieldProps('fullAddress')}
+                                            error={Boolean(touched.fullAddress && errors.fullAddress)}
+                                            helperText={touched.fullAddress && errors.fullAddress}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            label="Zip Code"
+                                            {...getFieldProps('zipCode')}
+                                            error={Boolean(touched.zipCode && errors.zipCode)}
+                                            helperText={touched.zipCode && errors.zipCode}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            label="Contact Name"
+                                            {...getFieldProps('contactName')}
+                                            error={Boolean(touched.contactName && errors.contactName)}
+                                            helperText={touched.contactName && errors.contactName}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            label="Phone Number"
+                                            {...getFieldProps('phoneNumber')}
+                                            error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+                                            helperText={touched.phoneNumber && errors.phoneNumber}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            label="Email Address"
+                                            {...getFieldProps('emailAddress')}
+                                            error={Boolean(touched.emailAddress && errors.emailAddress)}
+                                            helperText={touched.emailAddress && errors.emailAddress}
+                                        />
+                                        <TextField
+                                            fullWidth
+                                            label="VAT Number"
+                                            {...getFieldProps('vatNumber')}
+                                            error={Boolean(touched.vatNumber && errors.vatNumber)}
+                                            helperText={touched.vatNumber && errors.vatNumber}
                                         />
                                     </Stack>
                                 </Card>
