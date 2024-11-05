@@ -52,7 +52,16 @@ export const SupplierEdit = () => {
         },
         validationSchema: formSchema,
         onSubmit: async (formData) => {
-            await doRequest(supplierId, { name: formData.name, isActive, supplierId });
+            await doRequest(supplierId, { 
+                name: formData.name,
+                fullAddress: formData.fullAddress,
+                zipCode: formData.zipCode,
+                contactName: formData.contactName,
+                phoneNumber: formData.phoneNumber,
+                emailAddress: formData.emailAddress,
+                vatNumber: formData.vatNumber,
+                isActive
+            });
         }
     });
 

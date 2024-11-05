@@ -86,7 +86,7 @@ export default function LoginPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Login Fch Store
+              Login FCH Store
             </Typography>
             <LoginForm />
           </StyledContent>
